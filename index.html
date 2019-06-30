@@ -6,16 +6,20 @@
 
 </head>
 <body>
-	<div id="nw">
-		<form action="/submit" method="post">
-	    	<textarea id="code-box" type="text" name="code"> </textarea>
-	    	<textarea name="input" class="input" id="input-box"></textarea>
-   			<input type="submit" id="submit-button" value="submit">
-		</form>
-	</div>
+	<form action="/submit" method="post">
+		<div id="nw">
+	   		<textarea id="code-box" type="text" name="code"> </textarea>
+	   	</div>
+	   	<div id="ne">
+	   		<textarea name="input" class="input" id="input-box"></textarea>
+	   	</div>
+	   	<div id="sw">
+			<input type="submit" id="submit-button" value="submit">
+		</div>
+	</form>
 	
-	
-	<div id="ne">
+
+	<div id="se">
 		<textarea name="input" class="input" id="output-box"></textarea>
 	</div>
 

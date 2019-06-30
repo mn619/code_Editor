@@ -5,21 +5,25 @@ var output_box = document.getElementById("output-box");
 
 submit_btn.addEventListener("click", clicked);
 
+
+
+
 readTextFile("code.cpp", 'code-box');
 readTextFile("input.txt", 'input-box');
 readTextFile("output.txt", 'output-box');
+console.log('here');
+
+console.log('there');
 
 function clicked(){
-	readTextFile("code.cpp", 'code-box');
-	readTextFile("input.txt", 'input-box');
-	readTextFile("output.txt", 'output-box');
+	console.log("clicked");
+	
 }
 
 function readTextFile(filePath, id){
-
+	console.log(id);
     var txtFile = new XMLHttpRequest();
 	txtFile.open("GET", filePath, true);
-    console.log(id);
 
     txtFile.onreadystatechange = function (){
         if(txtFile.readyState === 4){
@@ -30,10 +34,8 @@ function readTextFile(filePath, id){
                 customTextElement.innerHTML = txtFile.responseText;
             }
         }
-    } 
-
+    }
     txtFile.send(null);
-
 }
 
 
