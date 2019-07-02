@@ -1,6 +1,6 @@
 var express = require('express');
 var app = express();
-var exec = require('child_process').exec;
+var child_process = require('child_process');
 var fs = require('fs');
 
 app.use('/', express.static('public'));
@@ -15,28 +15,26 @@ app.get('/', function (req, res) {
 
 app.post('/submit', urlencodedParser, function (req, res){
 	
-	fs.writeFileSync(__dirname + "/public/code.cpp", req.body.code, function(err) {
+	fs.writeFile(__dirname + "/public/code.cpp", req.body.code, function(err) {
 	    if(err) {
 	        return console.log(err);
 	    }
-	    console.log("The code was saved!");
 	}); 
 	
-	fs.writeFileSync(__dirname + "/public/input.txt", req.body.input, function(err) {
+	fs.writeFile(__dirname + "/public/input.txt", req.body.input, function(err) {
 	    if(err) {
 	        return console.log(err);
 	    }
-	    console.log("The input was saved!");
-	}); 
+	    
+	});
 
-	exec('g++ public/code.cpp')
-    console.log('1');
-	setTimeout(function() {
-		exec('time ./a.out < public/input.txt > public/output.txt');
-		console.log('2');
-	}, 3000);
-
-	res.sendFile(__dirname + '/index.html');
+	setTimeout(function(){
+		child_process.spawnSync('g++', ['public/code.cpp']);
+		child_process.execSync('./a.out < public/input.txt > public/output.txt');
+		res.sendFile(__dirname + '/index.html');		
+	}, 100);
+	
+	
 });
 
 
