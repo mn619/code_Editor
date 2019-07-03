@@ -8,23 +8,24 @@ html, body{width: 100%; height: 100%; padding: 0; margin: 0; background-color: #
 
 #editor{
 	position: absolute;
+	top: 1%;
 	width: 60%;
-	height:80%;
+	bottom: 1%;
 }
 
 #input{
 	position: absolute;
-	top : 0;
-	left: 65%;
-	right: 0;
+	top : 1%;
+	left: 61%;
+	right: 1%;
 	bottom: 60%;
 }
 
 #output{
 	position: absolute;
-	top : 45%;
-	left: 65%;
-	right: 0;
+	top : 41%;
+	left: 61%;
+	right: 1%;
 	bottom: 20%;
 }
 
@@ -49,6 +50,7 @@ html, body{width: 100%; height: 100%; padding: 0; margin: 0; background-color: #
 }
 
 #submit-button{
+	display: none;
 	position: absolute;
 	left: 5%;
 	top: 85%;
