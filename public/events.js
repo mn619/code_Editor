@@ -4,19 +4,21 @@ var input_box = document.getElementById("input-box");
 var output_box = document.getElementById("output-box");
 
 var editor = ace.edit('editor');
+var input = ace.edit('input');
+var output = ace.edit('output');
+
+// Set themes
 editor.setTheme('ace/theme/monokai');
+input.setTheme('ace/theme/monokai');
+output.setTheme('ace/theme/monokai');
+
 editor.getSession().setMode('ace/mode/c_cpp');
 
-submit_btn.addEventListener("click", clicked);
-function clicked(){
-  output_box.innerHTML = "Running...";
-}
+readTextFile("code.cpp", code_box, editor);
+readTextFile("input.txt", input_box, input);
+readTextFile("output.txt", output_box, output);
 
-readTextFile("code.cpp", 'code-box');
-readTextFile("input.txt", 'input-box');
-readTextFile("output.txt", 'output-box');
-
-function readTextFile(filePath, id){
+function readTextFile(filePath, box, disp_box){
     var txtFile = new XMLHttpRequest();
 	  txtFile.open("GET", filePath, true);
 
@@ -24,11 +26,8 @@ function readTextFile(filePath, id){
         if(txtFile.readyState === 4){
             if(txtFile.status === 200 || txtFile.status === 0){
                 var allText = txtFile.responseText;
-                var customTextElement = document.getElementById(id);
-                customTextElement.innerHTML = allText;
-                if(customTextElement === code_box){
-                    editor.setValue(allText);
-                }
+                box.innerHTML = allText;
+                disp_box.setValue(allText);
             }
         }
     }
@@ -38,7 +37,17 @@ function readTextFile(filePath, id){
 editor.setOptions({
   fontSize: "12pt"
 });
+input.setOptions({
+  fontSize: "15pt"
+});
+output.setOptions({
+  fontSize: "15pt"
+});
 
 editor.getSession().on("change", function () {
     code_box.innerHTML=editor.getSession().getValue();
+});
+
+input.getSession().on("change", function () {
+    input_box.innerHTML=input.getSession().getValue();
 });
