@@ -3,11 +3,12 @@ var code_box = document.getElementById("code-box");
 var input_box = document.getElementById("input-box");
 var output_box = document.getElementById("output-box");
 
-output_box.innerHTML = "Running...";
+var editor = ace.edit('editor');
+editor.setTheme('ace/theme/monokai');
+editor.getSession().setMode('ace/mode/c_cpp');
 
 submit_btn.addEventListener("click", clicked);
 function clicked(){
-
   output_box.innerHTML = "Running...";
 }
 
@@ -15,10 +16,9 @@ readTextFile("code.cpp", 'code-box');
 readTextFile("input.txt", 'input-box');
 readTextFile("output.txt", 'output-box');
 
-
 function readTextFile(filePath, id){
     var txtFile = new XMLHttpRequest();
-	txtFile.open("GET", filePath, true);
+	  txtFile.open("GET", filePath, true);
 
     txtFile.onreadystatechange = function (){
         if(txtFile.readyState === 4){
@@ -26,21 +26,19 @@ function readTextFile(filePath, id){
                 var allText = txtFile.responseText;
                 var customTextElement = document.getElementById(id);
                 customTextElement.innerHTML = allText;
+                if(customTextElement === code_box){
+                    editor.setValue(allText);
+                }
             }
         }
     }
     txtFile.send(null);
 }
 
-YUI().use(
-  'aui-ace-editor',
-  function(Y) {
-    new Y.AceEditor(
-      {
-        boundingBox: '#myEditor',
-        mode: 'c++',
-        value: 'int a = 1;'
-      }
-    ).render();
-  }
-);
+editor.setOptions({
+  fontSize: "12pt"
+});
+
+editor.getSession().on("change", function () {
+    code_box.innerHTML=editor.getSession().getValue();
+});
