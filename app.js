@@ -14,13 +14,13 @@ app.get('/', function (req, res) {
 });
 
 app.post('/submit', urlencodedParser, function (req, res){
-	fs.writeFile(__dirname + "/public/code.cpp", req.body.code, function(err) {
+	fs.writeFileSync(__dirname + "/public/code.cpp", req.body.code, function(err) {
 	    if(err) {
 	        return console.log(err);
 	    }
 	});
 
-	fs.writeFile(__dirname + "/public/input.txt", req.body.input, function(err) {
+	fs.writeFileSync(__dirname + "/public/input.txt", req.body.input, function(err) {
 	    if(err) {
 	        return console.log(err);
 	    }
@@ -32,8 +32,8 @@ app.post('/submit', urlencodedParser, function (req, res){
 		res.sendFile(__dirname + '/index.html');		
 	}, 100);
 	
+	
 });
-
 
 app.listen(3000, function() {
   console.log('Server running at http://127.0.0.1:8080/');
