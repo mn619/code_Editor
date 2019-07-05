@@ -26,11 +26,8 @@ app.post('/submit', urlencodedParser, function (req, res){
 	    }
 	});
 
-	setTimeout(function(){
-		child_process.execSync('time g++ public/code.cpp');
-		child_process.execSync('./a.out < public/input.txt > public/output.txt');
-		res.sendFile(__dirname + '/index.html');		
-	}, 100);	
+	child_process.execSync('python run_.py');
+	res.sendFile(__dirname + '/index.html');		
 });
 
 app.listen(3000, function() {

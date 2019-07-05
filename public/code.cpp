@@ -4,5 +4,6 @@ using namespace std;
 int main(){
     int n;
     cin>>n;
-    cout<<n + 1015;
+    for(int i = 1; i <= n; i++){}
+    cout<<n + 12;
 }
