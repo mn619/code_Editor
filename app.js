@@ -27,14 +27,12 @@ app.post('/submit', urlencodedParser, function (req, res){
 	});
 
 	setTimeout(function(){
-		child_process.execSync('g++ public/code.cpp');
+		child_process.execSync('time g++ public/code.cpp');
 		child_process.execSync('./a.out < public/input.txt > public/output.txt');
 		res.sendFile(__dirname + '/index.html');		
-	}, 100);
-	
-	
+	}, 100);	
 });
 
 app.listen(3000, function() {
-  console.log('Server running at http://127.0.0.1:8080/');
+  	console.log('Server running at http://127.0.0.1:8080/');
 });
